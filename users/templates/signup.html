@@ -1,0 +1,77 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %}Cadastro{% endblock title %} 
+
+{% block head %}
+    <link rel="stylesheet" href="{% static "users/css/signup.css" %}">
+{% endblock head %}
+
+{% block content %}
+    <div class="bg1">
+        <div class="container">
+            <div class="row" style="height: 100vh;">
+                <!-- Coluna 01 -->
+                <div class="col-md d-flex flex-column align-items-center justify-content-center"> 
+                    <div class="d-flex align-items-center align-self-start gap-1" style="margin-left: 17%;">
+                        <div class="">
+                            <img src="{% static "users/img/logo.png" %}" />
+                        </div>
+                        <div>
+                            <h1>Study Async</h1>
+                        </div>
+                    </div>
+                    <hr class="divider w-100">
+                    <div class="text-center mt-5">
+                        <h3>
+                            Sua plataforma online <br />
+                            para te ajudar nos estudos
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Coluna 02 -->
+                <div class="col-md my-auto">
+                    <!-- Form Container -->
+                    <div class="form-container p-5">
+                        <div class="d-flex gap-1">
+                            <div class="circle c1"></div>
+                            <div class="circle c2"></div>
+                            <div class="circle c3"></div>
+                        </div>
+
+                        <h3 class="my-4">Cadastre-se!</h3>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <section class="my-4 alert {{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </section>
+                            {% endfor %}
+                        {% endif %}
+
+                        <!-- Formulário -->
+                        <form action="{% url "signup" %}" method="POST">{% csrf_token %}
+                            <div class="mb-3">
+                                <label for="username" class="mb-1">Usuário</label>
+                                <input type="text" class="input-form" id="username" name="username">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password1" class="mb-1">Senha</label>
+                                <input type="password" class="input-form" id="password1" name="password1">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password2" class="mb-1">Confirmar senha</label>
+                                <input type="password" class="input-form" id="password2" name="password2">
+                            </div>
+
+                            <input type="submit" value="Cadastrar" class="signup-btn py-2 w-100"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
